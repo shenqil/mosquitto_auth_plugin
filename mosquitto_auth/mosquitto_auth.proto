@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option go_package = "./mosquitto_auth";
+
+package mosquitto_auth;
+
+service Greeter {
+  rpc BasicAuth (BasicAuthRequest) returns (BasicAuthReply) {}
+  rpc AclCheck (AclCheckRequest) returns (AclCheckReply) {}
+}
+
+message BasicAuthRequest {
+  string username = 1;
+  string password = 2;
+  string clientId = 3;
+  string clientAddress = 4;
+}
+
+message BasicAuthReply {
+  int32 code = 1;
+}
+
+message AclCheckRequest {
+  string username = 1;
+  string clientId = 2;
+  string topic = 3;
+  int32 access = 4;
+  int32 qos = 5;
+  int32 retain = 6;
+}
+
+message AclCheckReply {
+  int32 code = 1;
+}
