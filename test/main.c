@@ -61,7 +61,7 @@ void load_execute_close_library()
     if (PluginAclCheck != NULL)
     {
         int code = PluginAclCheck("username", "clientId", "topic", 0, 0, 0); // 调用库函数
-        printf("Calling PluginInit code = %d\n", code);
+        printf("Calling PluginAclCheck code = %d\n", code);
     }
     else
     {
