@@ -17,12 +17,12 @@ type server struct {
 
 func (s *server) BasicAuth(ctx context.Context, in *pb.BasicAuthRequest) (*pb.BasicAuthReply, error) {
 
-	log.Printf("server listening at %+v", in)
+	log.Printf("server listening BasicAuth at %+v", in)
 	return &pb.BasicAuthReply{Code: mosq_err.MOSQ_ERR_SUCCESS}, nil
 }
 
 func (s *server) AclCheck(ctx context.Context, in *pb.AclCheckRequest) (*pb.AclCheckReply, error) {
-	log.Printf("server listening at %+v", in)
+	log.Printf("server listening AclCheck at %+v", in)
 	return &pb.AclCheckReply{Code: mosq_err.MOSQ_ERR_SUCCESS}, nil
 }
 
