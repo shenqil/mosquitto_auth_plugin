@@ -77,9 +77,9 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 extern "C" {
 #endif
 
-extern int PluginInit(char* addr);
-extern int PluginBasicAuth(char* username, char* password, char* clientId, char* clientAddress);
-extern int PluginAclCheck(char* username, char* clientId, char* topic, int access, int qos, int retain);
+extern __declspec(dllexport) int PluginInit(char* addr);
+extern __declspec(dllexport) int PluginBasicAuth(char* username, char* password, char* clientId, char* clientAddress);
+extern __declspec(dllexport) int PluginAclCheck(char* username, char* clientId, char* topic, int access, int qos, int retain);
 
 #ifdef __cplusplus
 }

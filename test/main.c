@@ -7,6 +7,7 @@
 #define LOAD_LIBRARY(path) LoadLibrary(path)
 #define GET_FUNCTION(handle, name) GetProcAddress(handle, name)
 #define CLOSE_LIBRARY(handle) FreeLibrary(handle)
+#define GET_LAST_ERROR() GetLastError()
 
 #else // Linux 或 Unix 系统
 #define LIB_NAME "./grpc_auth.so"
@@ -15,6 +16,7 @@
 #define LOAD_LIBRARY(path) dlopen(path, RTLD_LAZY)
 #define GET_FUNCTION(handle, name) dlsym(handle, name)
 #define CLOSE_LIBRARY(handle) dlclose(handle)
+#define GET_LAST_ERROR() dlerror()
 
 #endif
 
@@ -29,6 +31,7 @@ void load_execute_close_library()
     if (handle == NULL)
     {
         printf("Failed to load library: %s\n", LIB_NAME);
+        printf("Error: %s\n", GET_LAST_ERROR());
         return;
     }
 
@@ -44,6 +47,7 @@ void load_execute_close_library()
     else
     {
         printf("Failed to find PluginInit in library\n");
+        printf("Error: %s\n", GET_LAST_ERROR());
     }
 
     P_PluginBasicAuth PluginBasicAuth = (P_PluginBasicAuth)GET_FUNCTION(handle, "PluginBasicAuth");
@@ -55,6 +59,7 @@ void load_execute_close_library()
     else
     {
         printf("Failed to find PluginBasicAuth in library\n");
+        printf("Error: %s\n", GET_LAST_ERROR());
     }
 
     P_PluginAclCheck PluginAclCheck = (P_PluginAclCheck)GET_FUNCTION(handle, "PluginAclCheck");
@@ -66,6 +71,7 @@ void load_execute_close_library()
     else
     {
         printf("Failed to find PluginAclCheck in library\n");
+        printf("Error: %s\n", GET_LAST_ERROR());
     }
 
     // 关闭库文件
